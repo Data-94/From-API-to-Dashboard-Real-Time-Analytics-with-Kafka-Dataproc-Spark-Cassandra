@@ -3,14 +3,14 @@
 from pyspark.sql import SparkSession
 
 spark = SparkSession.builder.appName("spark-kafka-cassandra") \
-    .config("spark.cassandra.connection.host", "34.78.12.94") \
+    .config("spark.cassandra.connection.host", "YOUR EXTERNAL KAFKA VM") \
     .config("spark.cassandra.connection.port", "9042") \
     .getOrCreate()
 
 # spark = SparkSession.builder.appName("spark-kafka-cassandra") \
 #     .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1") \
 #     .config("spark.jars.packages", "com.datastax.spark:spark-cassandra-connector_2.12:3.2.0") \
-#     .config("spark.cassandra.connection.host", "34.78.12.94") \
+#     .config("spark.cassandra.connection.host", "YOUR EXTERNAL KAFKA VM") \
 #     .config("spark.cassandra.connection.port", "9042") \
 #     .getOrCreate()
 
@@ -18,7 +18,7 @@ spark = SparkSession.builder.appName("spark-kafka-cassandra") \
 # spark.sparkContext.getConf().getAll()
 
 df = spark.readStream.format("kafka") \
-    .option("kafka.bootstrap.servers", "34.78.12.94:9092") \
+    .option("kafka.bootstrap.servers", "YOUR EXTERNAL KAFKA VM:9092") \
     .option("subscribe", "kur").load()
 
 df = df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
