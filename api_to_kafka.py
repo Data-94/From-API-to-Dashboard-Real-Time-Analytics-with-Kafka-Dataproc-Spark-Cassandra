@@ -6,7 +6,7 @@ import uuid
 # create timestamp
 from datetime import datetime
 
-producer = KafkaProducer(bootstrap_servers='34.76.159.192:9092',
+producer = KafkaProducer(bootstrap_servers='YOUR EXTERNAL KAFKA VM:9092',
                             value_serializer=lambda v: json.dumps(v).encode('utf-8'),
                             key_serializer=lambda v: json.dumps(v).encode('utf-8')
                             )
